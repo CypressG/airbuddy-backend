@@ -19,6 +19,7 @@ app.get("/location/search/:query", (req, res, config) => {
     headers: {
       "x-rapidapi-host": "foreca-weather.p.rapidapi.com",
       "x-rapidapi-key": "489000409fmshedfc99ee4b1f2c0p16696ejsn0edd126fc028",
+      "Access-Control-Allow-Origin": "*",
     },
   };
 
