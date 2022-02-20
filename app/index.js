@@ -7,15 +7,12 @@ const port = 3500;
 
 // Database
 const mongoose = require("mongoose");
-const  userActions  = require("./models/userActions");
+const userActions = require("./models/userActions");
 
 main().catch((err) => console.log(err));
 
 async function main() {
   await mongoose.connect("mongodb://localhost:27017/test");
-  const input = new userActions({ page: "bla", query: "Tada" });
-  //
-  await input.save();
 }
 
 app.use(express.json());
@@ -40,6 +37,12 @@ app.get("/location/search/:query", (req, res) => {
   axios
     .request(options)
     .then((response) => {
+      const input = new userActions({
+        page: "/location/search/",
+        query: `${req.params.query}`,
+      });
+      //
+      await input.save();
       res.send(JSON.stringify(response.data));
     })
     .catch((error) => {
