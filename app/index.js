@@ -36,7 +36,7 @@ app.get("/location/search/:query", (req, res) => {
 app.get("/location/geography/:locationId", (req, res) => {
   const options = {
     method: "GET",
-    url: `https://foreca-weather.p.rapidapi.com/location/${req.params.query}`,
+    url: `https://foreca-weather.p.rapidapi.com/location/${req.params.locationId}`,
     headers: {
       "x-rapidapi-host": "foreca-weather.p.rapidapi.com",
       "x-rapidapi-key": "489000409fmshedfc99ee4b1f2c0p16696ejsn0edd126fc028",
@@ -55,7 +55,7 @@ app.get("/location/geography/:locationId", (req, res) => {
 app.get("/weather/current/:locationId", (req, res) => {
   const options = {
     method: "GET",
-    url: `https://foreca-weather.p.rapidapi.com/current/${req.params.query}`,
+    url: `https://foreca-weather.p.rapidapi.com/current/${req.params.locationId}`,
     params: {
       alt: "0",
       tempunit: "C",
@@ -81,7 +81,7 @@ app.get("/weather/current/:locationId", (req, res) => {
 app.get("/weather/daily/:locationId", (req, res) => {
   const options = {
     method: "GET",
-    url: `https://foreca-weather.p.rapidapi.com/forecast/daily/${req.params.query}`,
+    url: `https://foreca-weather.p.rapidapi.com/forecast/daily/${req.params.locationId}`,
     params: {
       alt: "0",
       tempunit: "C",
