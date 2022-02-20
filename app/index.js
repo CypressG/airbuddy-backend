@@ -26,7 +26,7 @@ app.get("/location/search/:query", (req, res, config) => {
   axios
     .request(options)
     .then((response) => {
-      res.send({ name: "petras", test: `${JSON.stringify(response.data)}` });
+      res.send(JSON.stringify(response.data));
     })
     .catch((error) => {
       console.error(error);
