@@ -42,8 +42,7 @@ app.get("/location/search/:query", (req, res) => {
         query: `${req.params.query}`,
       });
       //
- 	input.save();
-
+      input.save();
       res.send(JSON.stringify(response.data));
     })
     .catch((error) => {
@@ -62,6 +61,13 @@ app.get("/location/geography/:locationId", (req, res) => {
   axios
     .request(options)
     .then((response) => {
+      const input = new userActions({
+        page: "/location/search/",
+        query: `${req.params.locationId}`,
+      });
+      //
+      input.save();
+
       res.send(JSON.stringify(response.data));
     })
     .catch((error) => {
@@ -90,6 +96,12 @@ app.get("/weather/current/:locationId", (req, res) => {
     .request(options)
     .then((response) => {
       res.send(JSON.stringify(response.data));
+      const input = new userActions({
+        page: "/location/search/",
+        query: `${req.params.locationId}`,
+      });
+      //
+      input.save();
     })
     .catch((error) => {
       console.error(error);
@@ -116,6 +128,12 @@ app.get("/weather/daily/:locationId", (req, res) => {
     .request(options)
     .then((response) => {
       res.send(JSON.stringify(response.data));
+      const input = new userActions({
+        page: "/location/search/",
+        query: `${req.params.locationId}`,
+      });
+      //
+      input.save();
     })
     .catch((error) => {
       console.error(error);
