@@ -3,4 +3,4 @@ const schema = require("./schemas/userActionsSchema");
 
 const userActions = mongoose.model("UserActions", schema);
 
-exports.userActions = userActions;
+module.exports = userActions;
