@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const schema = require("./schemas/userActionSchema");
+const schema = require("./schemas/userActionsSchema");
 
-const userAction = mongoose.model("UserActions", schema);
+const userActions = mongoose.model("UserActions", schema);
 
-exports.userAction = userAction;
+exports.userActions = userActions;

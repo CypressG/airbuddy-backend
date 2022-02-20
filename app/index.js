@@ -7,17 +7,16 @@ const port = 3500;
 
 // Database
 const mongoose = require("mongoose");
-const { userAction } = require("./models/userActions");
+const { userActions } = require("./models/userActions");
 
 main().catch((err) => console.log(err));
 
 async function main() {
   await mongoose.connect("mongodb://localhost:27017/test");
+  const input = new userActions({ page: "bla", query: "Tada" });
+  //
+  await input.save();
 }
-
-const input = new userAction({ page: "bla", query: "Tada" });
-//
-await input.save();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
