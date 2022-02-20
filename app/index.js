@@ -42,7 +42,8 @@ app.get("/location/search/:query", (req, res) => {
         query: `${req.params.query}`,
       });
       //
-      await input.save();
+ 	input.save();
+
       res.send(JSON.stringify(response.data));
     })
     .catch((error) => {
