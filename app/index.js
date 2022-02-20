@@ -7,7 +7,7 @@ const port = 3500;
 
 // Database
 const mongoose = require("mongoose");
-const { userActions } = require("./models/userActions");
+const  userActions  = require("./models/userActions");
 
 main().catch((err) => console.log(err));
 
