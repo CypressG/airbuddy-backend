@@ -8,7 +8,7 @@ const port = 3500;
 // Database
 const mongoose = require("mongoose");
 const userActions = require("./models/userActions");
-
+const locationActions = require("./models/locationActions");
 main().catch((err) => console.log(err));
 
 async function main() {
@@ -62,7 +62,7 @@ app.get("/location/geography/:locationId", (req, res) => {
     .request(options)
     .then((response) => {
       const input = new userActions({
-        page: "/location/search/",
+        page: "/location/geography/",
         query: `${req.params.locationId}`,
       });
       //
@@ -95,10 +95,13 @@ app.get("/weather/current/:locationId", (req, res) => {
   axios
     .request(options)
     .then((response) => {
-      res.send(JSON.stringify(response.data));
-      const input = new userActions({
-        page: "/location/search/",
-        query: `${req.params.locationId}`,
+      const convertedData = JSON.stringify(response.data);
+      res.send(convertedData);
+
+      const input = new locationActions({
+        location: `${req.params.locationId}`,
+        date: new Date(),
+        weather: convertedData.symbolPhrase,
       });
       //
       input.save();
@@ -129,7 +132,7 @@ app.get("/weather/daily/:locationId", (req, res) => {
     .then((response) => {
       res.send(JSON.stringify(response.data));
       const input = new userActions({
-        page: "/location/search/",
+        page: "/weather/daily/",
         query: `${req.params.locationId}`,
       });
       //
