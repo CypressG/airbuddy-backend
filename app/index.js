@@ -1,14 +1,12 @@
 const express = require("express");
 const axios = require("axios");
-
+const cors = require("cors");
 let app = express();
 const port = 3500;
-let config = {
-  headers: { "Access-Control-Allow-Origin": "*" },
-};
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors());
 app.get("/location/search/:query", (req, res, config) => {
   console.log(req.params.query);
 
