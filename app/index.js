@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
+require('dotenv').config()
 
 let app = express();
 const port = 3500;
@@ -28,7 +29,7 @@ app.get("/location/search/:query", (req, res) => {
     params: { lang: "en" },
     headers: {
       "x-rapidapi-host": "foreca-weather.p.rapidapi.com",
-      "x-rapidapi-key": "489000409fmshedfc99ee4b1f2c0p16696ejsn0edd126fc028",
+      "x-rapidapi-key": process.env.API_KEY,
       "Access-Control-Allow-Origin": "*",
     },
   };
@@ -55,7 +56,7 @@ app.get("/location/geography/:locationId", (req, res) => {
     url: `https://foreca-weather.p.rapidapi.com/location/${req.params.locationId}`,
     headers: {
       "x-rapidapi-host": "foreca-weather.p.rapidapi.com",
-      "x-rapidapi-key": "489000409fmshedfc99ee4b1f2c0p16696ejsn0edd126fc028",
+      "x-rapidapi-key": process.env.API_KEY,
     },
   };
   axios
@@ -88,20 +89,18 @@ app.get("/weather/current/:locationId", (req, res) => {
     },
     headers: {
       "x-rapidapi-host": "foreca-weather.p.rapidapi.com",
-      "x-rapidapi-key": "489000409fmshedfc99ee4b1f2c0p16696ejsn0edd126fc028",
+      "x-rapidapi-key": process.env.API_KEY,
     },
   };
 
   axios
     .request(options)
     .then((response) => {
-      const convertedData = JSON.stringify(response.data);
-      res.send(convertedData);
-
+      res.send(JSON.stringify(response.data));
       const input = new locationActions({
         location: `${req.params.locationId}`,
         date: new Date(),
-        weather: convertedData.symbolPhrase,
+        weather: response.data.current.symbolPhrase,
       });
       //
       input.save();
@@ -123,7 +122,7 @@ app.get("/weather/daily/:locationId", (req, res) => {
     },
     headers: {
       "x-rapidapi-host": "foreca-weather.p.rapidapi.com",
-      "x-rapidapi-key": "489000409fmshedfc99ee4b1f2c0p16696ejsn0edd126fc028",
+      "x-rapidapi-key": process.env.API_KEY,
     },
   };
 
