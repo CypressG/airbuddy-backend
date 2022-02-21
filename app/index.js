@@ -1,7 +1,9 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-
+const fs = require("fs");
+const https = require("https");
+const http = require("http");
 let app = express();
 const port = 3500;
 
@@ -9,6 +11,23 @@ const port = 3500;
 const mongoose = require("mongoose");
 const userActions = require("./models/userActions");
 const locationActions = require("./models/locationActions");
+
+const privateKey = fs.readFileSync(
+  "/etc/letsencrypt/live/kipras.me/privkey.pem",
+  "utf8"
+);
+const certificate = fs.readFileSync(
+  "/etc/letsencrypt/live/kipras.me/cert.pem",
+  "utf8"
+);
+const ca = fs.readFileSync("/etc/letsencrypt/live/kipras.me/chain.pem", "utf8");
+
+const credentials = {
+  key: privateKey,
+  cert: certificate,
+  ca: ca,
+};
+
 main().catch((err) => console.log(err));
 
 async function main() {
@@ -143,4 +162,13 @@ app.get("/weather/daily/:locationId", (req, res) => {
     });
 });
 
-app.listen(port, () => console.info(`Server has started on ${port}`));
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(80, () => {
+  console.log("HTTP Server running on port 80");
+});
+
+httpsServer.listen(443, () => {
+  console.log("HTTPS Server running on port 443");
+});
