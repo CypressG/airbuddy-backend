@@ -28,3 +28,10 @@ A: Back-end works as a middle-man or middleware between Weather API and ReactJS.
 3:
 ```npm start```
 
+
+You aswell have to change Weather/index.jsx and Results/indes.jsx axios requests urls to localhost ones
+
+from :
+```https://kipras.me/location/search/${query}```
+to :
+```http://localhost:3000/location/search/${query}```
