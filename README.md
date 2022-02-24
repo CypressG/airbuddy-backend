@@ -19,4 +19,12 @@ A: Back-end works as a middle-man or middleware between Weather API and ReactJS.
  - You as well need nodejs to run.
 
 
+## How to start?
+
+1: Clone this repo
+
+2:
+```npm install```
+3:
+```npm start```
 
