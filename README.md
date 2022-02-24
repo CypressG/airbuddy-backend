@@ -25,13 +25,7 @@ A: Back-end works as a middle-man or middleware between Weather API and ReactJS.
 
 2:
 ```npm install```
-3:
+3: Create an .env file and input your api key.
+4:
 ```npm start```
 
-
-You aswell have to change Weather/index.jsx and Results/indes.jsx axios requests urls to localhost ones
-
-from :
-```https://kipras.me/location/search/${query}```
-to :
-```http://localhost:3000/location/search/${query}```
