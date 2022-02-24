@@ -7,28 +7,12 @@ const http = require("http");
 require("dotenv").config();
 
 let app = express();
-const port = 3500;
 
 // Database
 const mongoose = require("mongoose");
 const userActions = require("./models/userActions");
 const locationActions = require("./models/locationActions");
 
-// const privateKey = fs.readFileSync(
-//   "/etc/letsencrypt/live/kipras.me/privkey.pem",
-//   "utf8"
-// );
-// const certificate = fs.readFileSync(
-//   "/etc/letsencrypt/live/kipras.me/cert.pem",
-//   "utf8"
-// );
-// const ca = fs.readFileSync("/etc/letsencrypt/live/kipras.me/chain.pem", "utf8");
-
-// const credentials = {
-//   key: privateKey,
-//   cert: certificate,
-//   ca: ca,
-// };
 
 main().catch((err) => console.log(err));
 
@@ -165,5 +149,5 @@ app.get("/weather/daily/:locationId", (req, res) => {
 const httpServer = http.createServer(app);
 
 httpServer.listen(8080, () => {
-  console.log("HTTP Server running on port 80");
+  console.log("HTTP Server running on port 8080");
 });
